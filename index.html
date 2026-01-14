@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oderinde Isaiah Oluwasegun</title>
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -17,26 +18,26 @@
 
   <!-- Navigation -->
   <nav>
-    <a href="index.html">Home</a>
+    <a href="#hero">Home</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
 
   <!-- Social Links -->
   <div class="socials">
-    <a href="https://instagram.com/yourhandle" target="_blank">Instagram</a>
-    <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a>
-    <a href="mailto:yourname@email.com">Email</a>
+    <a href="https://instagram.com/isaiaholu" target="_blank">Instagram</a>
+    <a href="https://twitter.com/isaiaholu" target="_blank">Twitter</a>
+    <a href="mailto: isaiaholuwasegunoderinde@gmail.com">Email</a>
   </div>
 </header>
 
 <!-- HERO SECTION -->
-<section class="hero">
+<section class="hero" id="hero">
   <h2>Welcome to My Personal Website</h2>
   <p>This is where I share who I am, what I do, and my journey into web development.</p>
-  <button onclick="changeText()">Click Me</button>
+  <button class="btn" onclick="changeText()">Click Me</button>
   <p id="text">I am learning JavaScript</p>
-  <button onclick="toggleDark()">Dark Mode</button>
+  <button class="btn" onclick="toggleDark()">Dark Mode</button>
 </section>
 
 <!-- ABOUT SECTION -->
@@ -52,7 +53,7 @@
     <input type="text" id="name" placeholder="Your Name" required><br><br>
     <input type="email" id="email" placeholder="Your Email" required><br><br>
     <textarea id="message" placeholder="Your Message" required></textarea><br><br>
-    <button type="submit">Send Message</button>
+    <button type="submit" class="btn">Send Message</button>
   </form>
   <p id="formResponse"></p>
 </section>
@@ -64,7 +65,7 @@
 
 <!-- JAVASCRIPT -->
 <script>
-  // Click Me text change
+  // Click Me
   function changeText() {
     let el = document.getElementById("text");
     if(el.innerText.includes("JavaScript")) {
@@ -74,13 +75,13 @@
     }
   }
 
-  // Dark mode toggle
-  let dark = false;
+  // Dark Mode
+  let dark = true;
   function toggleDark() {
     if(dark) {
       document.body.style.background = "#f0f4f8";
       document.body.style.color = "#222";
-      dark = false;
+      dark = true;
     } else {
       document.body.style.background = "#222";
       document.body.style.color = "#f0f4f8";
@@ -88,13 +89,28 @@
     }
   }
 
-  // Contact form submission (fake)
+  // Contact Form
   function submitForm(event) {
-    event.preventDefault(); // stop page reload
+    event.preventDefault();
     let name = document.getElementById("name").value;
-    document.getElementById("formResponse").innerText = `Thanks ${name}! Your message was sent 😎`;
-    document.getElementById("contactForm").reset(); // clear form
+    let response = document.getElementById("formResponse");
+    response.innerText = `Thanks ${name}! Your message was sent 😎`;
+    response.style.background = "#d4edda";
+    response.style.padding = "10px";
+    response.style.borderRadius = "5px";
+    response.style.marginTop = "10px";
+    document.getElementById("contactForm").reset();
   }
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e){
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
 </script>
 
 </body>
