@@ -9,7 +9,18 @@
   function changeText() {
     document.getElementById("text").innerText = "JavaScript is working 😎";
   }
-</script>
+<script>
+  let changed = false;
+
+  function changeText() {
+    if (changed) {
+      document.getElementById("text").innerText = "I am learning JavaScript";
+      changed = false;
+    } else {
+      document.getElementById("text").innerText = "JavaScript is working 😎";
+      changed = true;
+    }
+  }
 </script>
 </html>
 <!DOCTYPE html>
