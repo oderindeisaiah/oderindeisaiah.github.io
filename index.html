@@ -5,20 +5,24 @@
 
 <button onclick="changeText()">Click me</button>
 
+<button onclick="toggleDark()">Dark Mode</button>
+
 <script>
   function changeText() {
     document.getElementById("text").innerText = "JavaScript is working 😎";
   }
-<script>
-  let changed = false;
 
-  function changeText() {
-    if (changed) {
-      document.getElementById("text").innerText = "I am learning JavaScript";
-      changed = false;
+  let dark = false;
+
+  function toggleDark() {
+    if (dark) {
+      document.body.style.background = "white";
+      document.body.style.color = "black";
+      dark = false;
     } else {
-      document.getElementById("text").innerText = "JavaScript is working 😎";
-      changed = true;
+      document.body.style.background = "black";
+      document.body.style.color = "white";
+      dark = true;
     }
   }
 </script>
