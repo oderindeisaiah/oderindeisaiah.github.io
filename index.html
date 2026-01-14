@@ -1,66 +1,101 @@
-<img src="profile.jpg" width="150">
-<h1>Oderinde Isaiah Oluwasegun</h1>
-
-<p id="text">I am learning JavaScript</p>
-
-<button onclick="changeText()">Click me</button>
-
-<button onclick="toggleDark()">Dark Mode</button>
-
-<script>
-  function changeText() {
-    document.getElementById("text").innerText = "JavaScript is working 😎";
-  }
-
-  let dark = false;
-
-  function toggleDark() {
-    if (dark) {
-      document.body.style.background = "white";
-      document.body.style.color = "black";
-      dark = false;
-    } else {
-      document.body.style.background = "black";
-      document.body.style.color = "white";
-      dark = true;
-    }
-  }
-</script>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oderinde Isaiah Oluwasegun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
+  <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
   <h1>Oderinde Isaiah Oluwasegun</h1>
   <p>Creative • Learner • Future Web Star</p>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Social Links -->
+  <div class="socials">
+    <a href="https://instagram.com/yourhandle" target="_blank">Instagram</a>
+    <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a>
+    <a href="mailto:yourname@email.com">Email</a>
+  </div>
 </header>
 
+<!-- HERO SECTION -->
 <section class="hero">
   <h2>Welcome to My Personal Website</h2>
-  <p>This is where I share who I am and what I do.</p>
+  <p>This is where I share who I am, what I do, and my journey into web development.</p>
+  <button onclick="changeText()">Click Me</button>
+  <p id="text">I am learning JavaScript</p>
+  <button onclick="toggleDark()">Dark Mode</button>
 </section>
 
-<section class="about">
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
   <h2>About Me</h2>
-  <p>Hello! I’m Oderinde Isaiah Oluwasegun. I’m a beginner web creator, learning step by step, and today I made my first website. 💪</p>
+  <p>Hello! I’m Oderinde Isaiah Oluwasegun, a beginner web creator learning step by step. I love building websites and exploring new tech. This website is my portfolio and personal playground.</p>
 </section>
 
-<section class="contact">
+<!-- CONTACT SECTION -->
+<section class="contact" id="contact">
   <h2>Contact Me</h2>
-  <p>Email: isaiaholuwasegunoderinde@gmail.com</p>
-  <p>Instagram: @isaiaholu</p>
+  <form id="contactForm" onsubmit="submitForm(event)">
+    <input type="text" id="name" placeholder="Your Name" required><br><br>
+    <input type="email" id="email" placeholder="Your Email" required><br><br>
+    <textarea id="message" placeholder="Your Message" required></textarea><br><br>
+    <button type="submit">Send Message</button>
+  </form>
+  <p id="formResponse"></p>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <p>© 2026 Oderinde Isaiah Oluwasegun</p>
 </footer>
+
+<!-- JAVASCRIPT -->
+<script>
+  // Click Me text change
+  function changeText() {
+    let el = document.getElementById("text");
+    if(el.innerText.includes("JavaScript")) {
+      el.innerText = "JavaScript is working 😎";
+    } else {
+      el.innerText = "I am learning JavaScript";
+    }
+  }
+
+  // Dark mode toggle
+  let dark = false;
+  function toggleDark() {
+    if(dark) {
+      document.body.style.background = "#f0f4f8";
+      document.body.style.color = "#222";
+      dark = false;
+    } else {
+      document.body.style.background = "#222";
+      document.body.style.color = "#f0f4f8";
+      dark = true;
+    }
+  }
+
+  // Contact form submission (fake)
+  function submitForm(event) {
+    event.preventDefault(); // stop page reload
+    let name = document.getElementById("name").value;
+    document.getElementById("formResponse").innerText = `Thanks ${name}! Your message was sent 😎`;
+    document.getElementById("contactForm").reset(); // clear form
+  }
+</script>
 
 </body>
 </html>
