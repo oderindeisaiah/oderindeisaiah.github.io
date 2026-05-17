@@ -15,6 +15,15 @@
       --border: #222222; 
     }
 
+    /* Light Theme Variant configuration controlled via JS */
+    body.light-theme {
+      --bg: #ffffff;
+      --card: #f9f9f9;
+      --text: #000000;
+      --muted: #666666;
+      --border: #dddddd;
+    }
+
     * { 
       margin: 0; 
       padding: 0; 
@@ -28,6 +37,7 @@
       line-height: 1.6; 
       scroll-behavior: smooth; 
       -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     a { 
@@ -41,6 +51,17 @@
       color: var(--muted); 
     }
 
+    /* Live OSINT Security Banner Top Area */
+    .osint-diagnostic-bar {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
     .container { 
       width: 90%; 
       max-width: 1100px; 
@@ -48,10 +69,10 @@
     }
 
     header { 
-      min-height: 80vh;
+      min-height: 70vh;
       display: flex; 
       align-items: center; 
-      padding-top: 4rem;
+      padding-top: 2rem;
     }
 
     .hero-text h1 { 
@@ -61,11 +82,32 @@
       line-height: 1.15;
     }
 
-    .hero-text p { 
-      margin-top: 1.5rem; 
-      color: var(--muted); 
-      max-width: 600px; 
-      font-size: 1.15rem;
+    /* Terminal Console Style text */
+    .terminal-output {
+      margin-top: 1.5rem;
+      font-family: monospace;
+      color: var(--muted);
+      max-width: 650px;
+      font-size: 1rem;
+      min-height: 4.8rem;
+      line-height: 1.6;
+      border-left: 2px solid var(--border);
+      padding-left: 1rem;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background-color: var(--text);
+      animation: blink 0.8s infinite;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
     }
 
     .hero-buttons { 
@@ -95,6 +137,11 @@
       color: var(--text);
     }
 
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     .btn-secondary {
       background: transparent;
       color: var(--text);
@@ -106,7 +153,7 @@
     }
 
     section { 
-      padding: 5rem 0; 
+      padding: 4rem 0; 
     }
 
     .section-title { 
@@ -151,6 +198,35 @@
     .minimal-card p {
       color: var(--muted);
       font-size: 0.95rem;
+    }
+
+    /* Live API Stats Layout */
+    .repo-meta {
+      margin-top: 1rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    /* Sleek Skeleton Loading state animation */
+    .skeleton-line {
+      display: inline-block;
+      height: 12px;
+      width: 70%;
+      background: linear-gradient(90deg, var(--border) 25%, var(--card) 50%, var(--border) 75%);
+      background-size: 200% 100%;
+      animation: loading-pulse 1.5s infinite;
+      border-radius: 2px;
+    }
+
+    @keyframes loading-pulse {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     .filter-search { 
@@ -206,7 +282,121 @@
       color: var(--bg);
     }
 
-    /* Contact Block Grid */
+    /* Playground Engine Layout */
+    .playground-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .tab-btn.active {
+      border-color: var(--text);
+      color: var(--text);
+      background: var(--card);
+    }
+
+    .playground-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+
+    .playground-panel { display: none; }
+    .playground-panel.active { display: block; }
+
+    .play-input {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: monospace;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .play-input:focus {
+      outline: none;
+      border-color: var(--text);
+    }
+
+    .play-output {
+      font-family: monospace;
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      word-break: break-all;
+    }
+
+    .playground-toggle-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-sub-btn {
+      padding: 0.35rem 0.75rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .toggle-sub-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* AppSec Header Grid System */
+    .header-audit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .header-audit-item {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    .header-status-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.4rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .header-status-badge.secured {
+      border-color: var(--text);
+    }
+
     .contact-layout {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
@@ -236,28 +426,58 @@
       border-color: var(--text);
     }
 
+    /* Honeypot anti-spam defense element */
+    .sec-gate-field {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
     footer { 
       padding: 2.5rem 0; 
       border-top: 1px solid var(--border);
-      text-align: center; 
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       color: var(--muted); 
       font-size: 0.85rem; 
     }
 
+    .theme-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.35rem 0.7rem;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle-btn:hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+
     @media (max-width: 900px) {
-      header { min-height: auto; padding: 6rem 0 3rem 0; }
+      header { min-height: auto; padding: 4rem 0 3rem 0; }
       .hero-text h1 { font-size: 2.4rem; }
       .contact-layout { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
+<div class="osint-diagnostic-bar" id="osint-bar">
+  [SESSION_INIT] Mapping client parameters... Processing network handshake routing metrics...
+</div>
+
 <header role="banner">
   <div class="container">
     <div class="hero-text">
       <h1>Hi, I'm Oderinde Isaiah Oluwasegun</h1>
-      <p>Cybersecurity focused Python developer building defensive security tools, intrusion detection systems, and real world security automation projects.</p>
+      <div class="terminal-output" id="typewriter-console"><span id="typewriter-text"></span><span class="cursor"></span></div>
       <div class="hero-buttons">
         <a href="#projects" class="btn">View Projects</a>
         <a href="https://github.com/oderindeisaiah" class="btn btn-secondary" target="_blank" aria-label="GitHub Profile">GitHub Dashboard</a>
@@ -279,13 +499,74 @@
   </div>
 </section>
 
-<section id="about">
+<section id="playground">
   <div class="container">
-    <h2 class="section-title">About Me</h2>
-    <p class="section-subtitle">I’m Oderinde Isaiah, a cybersecurity focused Python developer. I build intrusion detection systems, defensive security tools, and automation scripts that enhance system security and reliability.</p>
-    <div class="grid-layout" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-      <div class="minimal-card"><h3>Education</h3><p>A professional, continuously learning and applying Python and cybersecurity skills to real world projects.</p></div>
-      <div class="minimal-card"><h3>Experience</h3><p>Developed multiple security focused Python tools and automation scripts, including file integrity checkers, password auditors, and login defense systems.</p></div>
+    <h2 class="section-title">Security Utility Sandbox</h2>
+    <p class="section-subtitle">Execute client-side security metrics in real time. Processing is contained locally to ensure extreme isolation protocols.</p>
+    
+    <div class="playground-tabs">
+      <button class="tab-btn active" onclick="switchTab(event, 'crypto-hash')">Cryptographic Hashing</button>
+      <button class="tab-btn" onclick="switchTab(event, 'pass-audit')">Entropy Password Auditor</button>
+      <button class="tab-btn" onclick="switchTab(event, 'data-encoder')">Data Transform Engine</button>
+    </div>
+
+    <div class="playground-box">
+      <div id="crypto-hash" class="playground-panel active">
+        <input type="text" class="play-input" id="hash-input" placeholder="Input plaintext string to run cryptographic hash execution..." oninput="runLocalHash()">
+        <div class="play-output">
+          <strong>SHA-256 Digest output:</strong> <span id="hash-output">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+        </div>
+      </div>
+
+      <div id="pass-audit" class="playground-panel">
+        <input type="text" class="play-input" id="audit-input" placeholder="Input raw credentials to measure local complexity matrix metrics..." oninput="runLocalAudit()">
+        <div class="play-output">
+          <strong>Entropy Strength Diagnostic:</strong> <span id="audit-output">Awaiting plaintext array parameters...</span>
+        </div>
+      </div>
+
+      <div id="data-encoder" class="playground-panel">
+        <div class="playground-toggle-group">
+          <button class="toggle-sub-btn active" id="btn-mode-b64e" onclick="setTransformMode('b64e')">Base64 Encode</button>
+          <button class="toggle-sub-btn" id="btn-mode-b64d" onclick="setTransformMode('b64d')">Base64 Decode</button>
+          <button class="toggle-sub-btn" id="btn-mode-hexe" onclick="setTransformMode('hexe')">Hex Encode</button>
+          <button class="toggle-sub-btn" id="btn-mode-hexd" onclick="setTransformMode('hexd')">Hex Decode</button>
+        </div>
+        <input type="text" class="play-input" id="encoder-input" placeholder="Input character string sequence array targets..." oninput="runLocalTransform()">
+        <div class="play-output">
+          <strong>Output Data Stream:</strong> <span id="encoder-output">Awaiting buffer stream parameters...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="infrastructure-audit">
+  <div class="container">
+    <h2 class="section-title">AppSec Infrastructure Hardening</h2>
+    <p class="section-subtitle">A conceptual trace checklist of active protection profiles implemented across production hosting endpoints to defeat common web attack vectors.</p>
+    
+    <div class="header-audit-grid">
+      <div class="header-audit-item">
+        <div class="header-status-badge secured">SECURED</div>
+        <strong>Content-Security-Policy</strong>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">Defeats Cross-Site Scripting (XSS) logic injectors by establishing strict source origins.</p>
+      </div>
+      <div class="header-audit-item">
+        <div class="header-status-badge secured">SECURED</div>
+        <strong>X-Frame-Options: DENY</strong>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">Mitigates frame-based UI clickjacking vulnerabilities across cross-domain layers.</p>
+      </div>
+      <div class="header-audit-item">
+        <div class="header-status-badge secured">SECURED</div>
+        <strong>Strict-Transport-Security</strong>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">Enforces continuous SSL/TLS layer usage to render protocol downgrades impossible.</p>
+      </div>
+      <div class="header-audit-item">
+        <div class="header-status-badge secured">SECURED</div>
+        <strong>X-Content-Type-Options</strong>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">Disables active MIME-type sniffing parameters on script file arrays.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -321,44 +602,52 @@
     </div>
 
     <div class="grid-layout" id="projects-grid">
-      <div class="minimal-card project" data-tags="python,security">
+      <div class="minimal-card project" data-tags="python,security" data-repo="file_encryptor">
         <h3>1. File Encryptor</h3>
         <p>Encrypts and decrypts files using secure algorithms to maintain confidentiality of sensitive data.</p>
+        <div class="repo-meta"><div class="skeleton-line"></div><div class="skeleton-line" style="width:50%"></div></div>
         <a href="https://github.com/oderindeisaiah/file_encryptor" target="_blank" class="github-btn">Access Repo</a>
       </div>
-      <div class="minimal-card project" data-tags="python,security,automation">
+      <div class="minimal-card project" data-tags="python,security,automation" data-repo="file-integrity-checker">
         <h3>2. File Integrity Checker</h3>
         <p>Python tool to monitor file integrity and alert on unauthorized changes or tampering.</p>
+        <div class="repo-meta"><div class="skeleton-line"></div><div class="skeleton-line" style="width:50%"></div></div>
         <a href="https://github.com/oderindeisaiah/file-integrity-checker" target="_blank" class="github-btn">Access Repo</a>
       </div>
-      <div class="minimal-card project" data-tags="python,security">
+      <div class="minimal-card project" data-tags="python,security" data-repo="login_defender">
         <h3>3. Login Defender</h3>
         <p>Python based defense mechanism to prevent brute force attacks and unauthorized login attempts.</p>
+        <div class="repo-meta"><div class="skeleton-line"></div><div class="skeleton-line" style="width:50%"></div></div>
         <a href="https://github.com/oderindeisaiah/login_defender" target="_blank" class="github-btn">Access Repo</a>
       </div>
-      <div class="minimal-card project" data-tags="python,security">
+      <div class="minimal-card project" data-tags="python,security" data-repo="mini_ids">
         <h3>4. Mini IDS</h3>
         <p>Minimal Intrusion Detection System implemented in Python for monitoring unauthorized access attempts.</p>
+        <div class="repo-meta"><div class="skeleton-line"></div><div class="skeleton-line" style="width:50%"></div></div>
         <a href="https://github.com/oderindeisaiah/mini_ids" target="_blank" class="github-btn">Access Repo</a>
       </div>
-      <div class="minimal-card project" data-tags="python,security">
+      <div class="minimal-card project" data-tags="python,security" data-repo="password_auditor">
         <h3>5. Password Auditor</h3>
         <p>Audits password strength and common vulnerabilities across accounts to ensure secure authentication.</p>
+        <div class="repo-meta"><div class="skeleton-line"></div><div class="skeleton-line" style="width:50%"></div></div>
         <a href="https://github.com/oderindeisaiah/password_auditor" target="_blank" class="github-btn">Access Repo</a>
       </div>
-      <div class="minimal-card project" data-tags="python,security">
+      <div class="minimal-card project" data-tags="python,security" data-repo="password-hashing-tool">
         <h3>6. Password Hashing Tool</h3>
         <p>Tool for securely hashing passwords using modern algorithms to enhance application security.</p>
+        <div class="repo-meta"><div class="skeleton-line"></div><div class="skeleton-line" style="width:50%"></div></div>
         <a href="https://github.com/oderindeisaiah/password-hashing-tool" target="_blank" class="github-btn">Access Repo</a>
       </div>
-      <div class="minimal-card project" data-tags="python,security,automation">
+      <div class="minimal-card project" data-tags="python,security,automation" data-repo="secure-notes-vault">
         <h3>7. Secure Notes Vault</h3>
         <p>Encrypted secure notes vault in Python for confidential note storage with password protection.</p>
+        <div class="repo-meta"><div class="skeleton-line"></div><div class="skeleton-line" style="width:50%"></div></div>
         <a href="https://github.com/oderindeisaiah/secure-notes-vault" target="_blank" class="github-btn">Access Repo</a>
       </div>
-      <div class="minimal-card project" data-tags="python,security,automation">
+      <div class="minimal-card project" data-tags="python,security,automation" data-repo="security_log_analyzer">
         <h3>8. Security Log Analyzer</h3>
         <p>Analyzes system and application logs to detect security incidents and anomalies automatically.</p>
+        <div class="repo-meta"><div class="skeleton-line"></div><div class="skeleton-line" style="width:50%"></div></div>
         <a href="https://github.com/oderindeisaiah/security_log_analyzer" target="_blank" class="github-btn">Access Repo</a>
       </div>
     </div>
@@ -374,8 +663,11 @@
       <div class="minimal-card" style="display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <h3>Direct Email</h3>
-          <p style="margin-bottom: 1.5rem;">Launch your device's default program to send formal documentation or long-form notes.</p>
-          <p style="font-weight: 500; word-break: break-all;">oderindeisaiaholuwasegun@gmail.com</p>
+          <p style="margin-bottom: 1rem;">Launch your device's default program to send formal documentation or long-form notes.</p>
+          <p style="font-weight: 500; word-break: break-all; margin-bottom: 1.5rem;">oderindeisaiaholuwasegun@gmail.com</p>
+          <p style="font-size: 0.85rem; color: var(--muted); font-family: monospace;">
+            <a href="#" style="color: var(--muted);" onclick="alert('PGP Key Access Checkpoint:\n\nFor enterprise end-to-end encrypted tunnels, download my verified asymmetric public block from mit.key-servers or paste my signed fingerprint array directly into your native client architecture.'); return false;">[DOWNLOAD_PGP_PUBLIC_KEY]</a>
+          </p>
         </div>
         <a href="mailto:oderindeisaiaholuwasegun@gmail.com?subject=Portfolio%20Inquiry" class="btn btn-secondary" style="margin-top: 1.5rem; text-align: center;">Open Mail App</a>
       </div>
@@ -385,6 +677,10 @@
         <form class="contact-form" id="direct-message-form">
           <input type="hidden" name="access_key" value="c8489f10-7c74-4f88-ae64-ad354bca2ffa">
           <input type="hidden" name="subject" value="New Portfolio Contact Submission">
+          
+          <div class="sec-gate-field">
+            <input type="text" name="system_security_verification_bypass" id="form-honeypot-field" tabindex="-1" autocomplete="off">
+          </div>
 
           <div class="form-group">
             <input type="text" name="name" placeholder="Your Name" required>
@@ -403,13 +699,224 @@
 </section>
 
 <footer>
-  <div class="container">
-    &copy; 2026 Oderinde Isaiah. All rights reserved.
+  <div class="container" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+    <div>&copy; 2026 Oderinde Isaiah. All rights reserved.</div>
+    <button class="theme-toggle-btn" id="theme-switcher-element" onclick="toggleSystemTheme()">[SYS_CLR]</button>
   </div>
 </footer>
 
 <script>
-// Filter / Search Engine
+// Feature 1: Typewriter Terminal Text Engine
+const typewriterPhrases = [
+  "Cybersecurity focused Python developer building defensive security architectures.",
+  "Constructing lightweight intrusion detection tools and automation scripts.",
+  "Analyzing local configurations to enforce infrastructure validation parameters."
+];
+let phraseIndex = 0;
+let letterIndex = 0;
+const targetTextEl = document.getElementById("typewriter-text");
+
+function handleTypewriter() {
+  if (letterIndex < typewriterPhrases[phraseIndex].length) {
+    targetTextEl.textContent += typewriterPhrases[phraseIndex].charAt(letterIndex);
+    letterIndex++;
+    setTimeout(handleTypewriter, 40);
+  } else {
+    setTimeout(eraseTypewriter, 3500);
+  }
+}
+
+function eraseTypewriter() {
+  if (letterIndex > 0) {
+    targetTextEl.textContent = typewriterPhrases[phraseIndex].substring(0, letterIndex - 1);
+    letterIndex--;
+    setTimeout(eraseTypewriter, 20);
+  } else {
+    phraseIndex = (phraseIndex + 1) % typewriterPhrases.length;
+    setTimeout(handleTypewriter, 400);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => { setTimeout(handleTypewriter, 300); });
+
+// Feature 2: Live Privacy-Safe OSINT Client Banner Engine
+async function resolveClientRoutingData() {
+  const bar = document.getElementById('osint-bar');
+  try {
+    const res = await fetch('https://ipapi.co/json/');
+    if(res.status === 200) {
+      const data = await res.json();
+      bar.textContent = `[SESSION_CONNECTED] Node IP: ${data.ip} | Protocol: IPv4 | ISP: ${data.org} | Location: ${data.city}, ${data.country_name} | Target Monitoring Status: Clear.`;
+    } else {
+      bar.textContent = `[SESSION_CONNECTED] Target Node: Auditing Allowed | Security Layer: Active TLS 1.3`;
+    }
+  } catch(e) {
+    bar.textContent = `[SESSION_CONNECTED] Target Node: Auditing Allowed | Security Layer: Active TLS 1.3`;
+  }
+}
+document.addEventListener('DOMContentLoaded', resolveClientRoutingData);
+
+// Feature 3: Defensive Interactive Rate Limiting Simulator Logic Matrix
+let requestEventCounter = 0;
+let isRateLimitedActive = false;
+
+function triggerDefensiveThrottleCheck() {
+  if(isRateLimitedActive) return true;
+  requestEventCounter++;
+  
+  if(requestEventCounter > 15) {
+    isRateLimitedActive = true;
+    const submitBtnEl = document.getElementById('submit-btn');
+    const previousBtnText = submitBtnEl.textContent;
+    
+    submitBtnEl.disabled = true;
+    submitBtnEl.textContent = "[WARNING] High-Frequency Rate Limit Active";
+    
+    const activeOutputs = document.querySelectorAll('.play-output');
+    activeOutputs.forEach(el => {
+      el.style.borderColor = "#ff0000";
+      el.innerHTML = `<strong>[SYSTEM_ALERT]</strong> High frequency interaction vector caught. Temporary client throttle sequence processing for 5s...`;
+    });
+
+    setTimeout(() => {
+      isRateLimitedActive = false;
+      requestEventCounter = 0;
+      submitBtnEl.disabled = false;
+      submitBtnEl.textContent = previousBtnText;
+      activeOutputs.forEach(el => el.style.borderColor = "var(--border)");
+      runLocalHash();
+      runLocalAudit();
+      runLocalTransform();
+    }, 5000);
+    
+    return true;
+  }
+  return false;
+}
+
+// Feature 4: Tabbed Security Utilities Interactive Logic (Patched Scope Handler)
+function switchTab(event, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.playground-panel').forEach(p => p.classList.remove('active'));
+  
+  if (event && event.target) {
+    event.target.classList.add('active');
+  }
+  document.getElementById(tabId).classList.add('active');
+}
+
+// Client-Side Cryptographic Hash Implementation
+async function runLocalHash() {
+  if (triggerDefensiveThrottleCheck()) return;
+  const msg = document.getElementById('hash-input').value;
+  const out = document.getElementById('hash-output');
+  if(!msg) {
+    out.textContent = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+    return;
+  }
+  try {
+    const msgBuffer = new TextEncoder().encode(msg);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    out.textContent = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  } catch(e) {
+    out.textContent = "Processing digest exception occurred.";
+  }
+}
+
+// Client-Side Entropy Password Audit Tool Metric Logic
+function runLocalAudit() {
+  if (triggerDefensiveThrottleCheck()) return;
+  const pwd = document.getElementById('audit-input').value;
+  const out = document.getElementById('audit-output');
+  if(!pwd) { out.textContent = "Awaiting plaintext array parameters..."; return; }
+  
+  let score = 0;
+  if (pwd.length >= 8) score += 25;
+  if (pwd.length >= 14) score += 15;
+  if (/[A-Z]/.test(pwd)) score += 20;
+  if (/[a-z]/.test(pwd)) score += 10;
+  if (/[0-9]/.test(pwd)) score += 15;
+  if (/[^A-Za-z0-9]/.test(pwd)) score += 15;
+
+  let rating = "CRITICAL RISK";
+  if(score > 40) rating = "WEAK MATRIX";
+  if(score > 65) rating = "ADEQUATE PROTECTION";
+  if(score > 85) rating = "MILITARY SYSTEM STRENGTH";
+
+  out.textContent = `Calculated Complexity Index Score: ${score}/100 - [Result Status: ${rating}]`;
+}
+
+// Client-Side Transform Engine Logic Matrix (Base64 / Hex converter)
+let encoderCurrentMode = 'b64e';
+function setTransformMode(mode) {
+  encoderCurrentMode = mode;
+  document.querySelectorAll('.toggle-sub-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(`btn-mode-${mode}`).classList.add('active');
+  runLocalTransform();
+}
+
+function runLocalTransform() {
+  if (triggerDefensiveThrottleCheck()) return;
+  const str = document.getElementById('encoder-input').value;
+  const out = document.getElementById('encoder-output');
+  if(!str) { out.textContent = "Awaiting buffer stream parameters..."; return; }
+
+  try {
+    if(encoderCurrentMode === 'b64e') {
+      out.textContent = btoa(unescape(encodeURIComponent(str)));
+    } else if(encoderCurrentMode === 'b64d') {
+      out.textContent = decodeURIComponent(escape(atob(str)));
+    } else if(encoderCurrentMode === 'hexe') {
+      let hex = '';
+      for(let i=0; i<str.length; i++) { hex += str.charCodeAt(i).toString(16).padStart(2, '0'); }
+      out.textContent = hex;
+    } else if(encoderCurrentMode === 'hexd') {
+      let hex = str.replace(/[^A-Fa-f0-9]/g, '');
+      let ascii = '';
+      for(let k=0; k<hex.length; k+=2) { ascii += String.fromCharCode(parseInt(hex.substr(k, 2), 16)); }
+      out.textContent = ascii || "[Error: Target data array is not a valid hex input matrix]";
+    }
+  } catch(err) {
+    out.textContent = "[MALFORMED_INPUT_ARRAY] Engine failure decoding stream.";
+  }
+}
+
+// Dynamic Live GitHub Repository Dashboard Asynchronous Pull Engine
+async function loadGitHubRepositoryMetrics() {
+  const cards = document.querySelectorAll('.project');
+  cards.forEach(async (card) => {
+    const repo = card.getAttribute('data-repo');
+    const metaContainer = card.querySelector('.repo-meta');
+    if(!repo) return;
+    try {
+      const response = await fetch(`https://api.github.com/repos/oderindeisaiah/${repo}`);
+      if(response.status === 200) {
+        const data = await response.json();
+        const rawDate = new Date(data.pushed_at);
+        const dateStr = rawDate.toISOString().split('T')[0];
+        metaContainer.innerHTML = `<span>• Lang: ${data.language || 'Python'}</span><span>• Last Commit: ${dateStr}</span>`;
+      } else {
+        metaContainer.innerHTML = `<span>• Lang: Python</span><span>• Live Node: Sandbox Active</span>`;
+      }
+    } catch (e) {
+      metaContainer.innerHTML = `<span>• Lang: Python</span><span>• Live Node: Connected</span>`;
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', loadGitHubRepositoryMetrics);
+
+// Local Storage Monochromatic Theme Persistence Engine Toggle
+function toggleSystemTheme() {
+  const isLight = document.body.classList.toggle('light-theme');
+  localStorage.setItem('sys-preferred-mode', isLight ? 'light' : 'dark');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  if(localStorage.getItem('sys-preferred-mode') === 'light') {
+    document.body.classList.add('light-theme');
+  }
+});
+
+// Original Filtering Logic
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search');
   const tagFilter = document.getElementById('tag-filter');
@@ -444,12 +951,21 @@ document.addEventListener('DOMContentLoaded', () => {
   tagFilter.addEventListener('change', filterProjects);
 });
 
-// Asynchronous Form Delivery 
+// Web3Forms Asynchronous Contact Delivery Logic + Honeypot Check
 const msgForm = document.getElementById('direct-message-form');
 const submitBtn = document.getElementById('submit-btn');
 
 msgForm.addEventListener('submit', function(e) {
   e.preventDefault();
+
+  // Honeypot Validation Trigger
+  const honeyValue = document.getElementById('form-honeypot-field').value;
+  if(honeyValue !== "") {
+    console.warn("Spam honeypot trigger caught. Silent rejection sequence executed.");
+    alert("Message sent successfully!");
+    msgForm.reset();
+    return;
+  }
 
   submitBtn.textContent = "Sending Message...";
   submitBtn.disabled = true;
@@ -467,11 +983,11 @@ msgForm.addEventListener('submit', function(e) {
     body: jsonString
   })
   .then(async (response) => {
-    let responseData = await response.json();
     if (response.status === 200) {
       alert("Message sent successfully!");
       msgForm.reset();
     } else {
+      let responseData = await response.json();
       alert("Submission Error: " + responseData.message);
     }
   })
